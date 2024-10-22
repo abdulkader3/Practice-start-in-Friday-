@@ -91,7 +91,7 @@ const Login = () => {
             <p className='text-[12px] text-[#c7ff1f] '>{passwordError} </p>
             <button className='w-full h-[50px] bg-transparent border rounded-[20px] pl-[35px] mt-20 mb-3 hover:bg-white hover:text-cyan-400 active:scale-110 hover:scale-95 transition-all'>Login</button>
             <div className=" mt-10">
-          <Link to='/register'> <p>don't have an accaount ? Regester </p> </Link>
+          <Link to='/register'> <p>Don't have an accaount ? Regester </p> </Link>
         </div>
         </form>
 

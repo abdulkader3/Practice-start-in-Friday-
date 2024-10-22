@@ -4,6 +4,7 @@ import './App.css'
 import Home from './Pages/Home'
 import Regester from './Pages/Regester'
 import app from './firebase.config'
+import LandingPage from './Pages/LandingPage'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route>
         <Route path='/' element={<Home/>}/>
         <Route path='/register' element={<Regester/>}/>
+        <Route path='/landingpage' element={<LandingPage/>}/>
       </Route>
     )
   )

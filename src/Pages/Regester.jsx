@@ -179,7 +179,7 @@ const Regester = () => {
             <div className=" mt-10">
               <Link to="/">
                 {" "}
-                <p>don't have an accaount ? Regester </p>{" "}
+                <p> Already have an accaount ? Login </p>{" "}
               </Link>
             </div>
           </form>
