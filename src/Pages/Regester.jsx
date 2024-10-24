@@ -87,7 +87,7 @@ const Regester = () => {
             });
 
             // tostify and naviget
-            navigate("/");
+            navigate("/login");
             
             toast('Regester Done', {
               position: "top-right",

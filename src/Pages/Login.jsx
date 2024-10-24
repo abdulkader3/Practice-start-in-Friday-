@@ -92,6 +92,7 @@ const Login = () => {
 
               // user regester
               set(ref(db, 'users/' + user.uid), {
+                UserId: user.uid,
                 username: user.displayName,
                 email: user.email,
                 profile_picture : user.photoURL,

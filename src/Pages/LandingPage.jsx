@@ -69,18 +69,9 @@ const LandingPage = () => {
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
       setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
-    } else{
-
-    }
+    } 
   };
   // react cruper
-
-  // button manege
-  const [hide , uphide] = useState(false)
-  const show = ()=>{
-    uphide(!hide)
-  }
-  // button manege
 
   // save button
   const save = () => {
@@ -136,15 +127,12 @@ const LandingPage = () => {
           {/* update profile */}
           {profile && (
             <div className=" w-full h-full bg-[#303030c1] absolute ">
-              <div className="w-full flex justify-end text-4xl ">
-                
+              <div className="w-full flex justify-between text-4xl mb-10 ">
+                <CiSaveUp2
+                  className="bg-[#ffffffb9] rounded-full"
+                  onClick={save}
+                />
                 <FcCancel onClick={edit} />
-              </div>
-              <div className="w-full flex ml-auto text-4xl mb-5 mt-[-30px] ">
-                
-              {cropData && cropData !== "#" && (
-                <CiSaveUp2 className="bg-[#ffffffb9] rounded-full" onClick={save} />
-              )}
               </div>
               {/* cropper TSX  */}
               <div>
