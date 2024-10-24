@@ -4,7 +4,8 @@ import { FaEdit } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
 
 // firebase
-import { getStorage, ref, uploadString } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadString  } from "firebase/storage";
+import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
 // firebase
 
 // react croper
@@ -13,17 +14,20 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { CiSaveUp2 } from "react-icons/ci";
 
+
 // react croper
 
 const LandingPage = () => {
   // data from redux of current mainuser
   const mainUserReduxData = useSelector((state) => state.info.userdata);
 
-  
-
   // firebase
   const storage = getStorage();
-  const storageRef = ref(storage, 'some-child');
+  const auth = getAuth();
+  const storageRef = ref(
+    storage,
+    "userProfile/" + mainUserReduxData?.uid + ".png"
+  );
   // firebase
 
   const logout = () => {
@@ -65,23 +69,42 @@ const LandingPage = () => {
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
       setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+    } else{
+
     }
   };
   // react cruper
 
+  // button manege
+  const [hide , uphide] = useState(false)
+  const show = ()=>{
+    uphide(!hide)
+  }
+  // button manege
 
   // save button
-    const save = ()=>{
+  const save = () => {
     // firebase
     const message4 = cropData;
     uploadString(storageRef, message4, "data_url").then((snapshot) => {
       console.log("Uploaded a data_url string!");
     });
-    // firebase
 
-    }
+    getDownloadURL(storageRef)
+    .then((url) => {
+      console.log(url)
+      onAuthStateChanged(auth, (user) => {
+        updateProfile(auth.currentUser, {
+           photoURL: url,
+        }).then(()=>{location.reload()})
+      });
+      upprofile(false)
+      
+    });
+    // firebase
+  };
   // save button
-  
+
   // profile edit magement
 
   return (
@@ -91,8 +114,8 @@ const LandingPage = () => {
         <div className="w-[700px] relative h-screen bg-white flex flex-col items-center pt-20 justify-between">
           <div className="">
             <div className="w-full flex justify-between">
-              <div className="w-[150px] h-[150px]   ">
-                <img src={mainUserReduxData?.photoURL} alt="profile" />
+              <div className="w-[150px] h-[150px] overflow-hidden rounded-full ">
+                <img className="w-full" src={mainUserReduxData?.photoURL} alt="profile" />
               </div>
               <FaEdit onClick={edit} />
             </div>
@@ -113,9 +136,15 @@ const LandingPage = () => {
           {/* update profile */}
           {profile && (
             <div className=" w-full h-full bg-[#303030c1] absolute ">
-              <div className="w-full flex justify-between text-4xl mb-10 ">
-                <CiSaveUp2 className="bg-[#ffffffb9] rounded-full" onClick={save} />
+              <div className="w-full flex justify-end text-4xl ">
+                
                 <FcCancel onClick={edit} />
+              </div>
+              <div className="w-full flex ml-auto text-4xl mb-5 mt-[-30px] ">
+                
+              {cropData && cropData !== "#" && (
+                <CiSaveUp2 className="bg-[#ffffffb9] rounded-full" onClick={save} />
+              )}
               </div>
               {/* cropper TSX  */}
               <div>
