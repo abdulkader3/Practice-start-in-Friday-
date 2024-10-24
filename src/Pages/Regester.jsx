@@ -7,6 +7,7 @@ import {
   updateProfile,
   sendEmailVerification,
 } from "firebase/auth";
+import { Slide, toast } from "react-toastify";
 
 const Regester = () => {
   // to navigate
@@ -87,7 +88,18 @@ const Regester = () => {
 
             // tostify and naviget
             navigate("/");
-            console.log(user);
+            
+            toast('Regester Done', {
+              position: "top-right",
+              autoClose: 950,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              transition: Slide,
+              });
             // ...
           })
           .catch((error) => {
@@ -98,16 +110,48 @@ const Regester = () => {
 
             if (errorCode == "auth/email-already-in-use") {
               // tostify
-              console.log("accaount agi khola ase");
+              toast('You already have account', {
+                position: "top-right",
+                autoClose: 950,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });
+              
             }
             if (errorCode == "auth/weak-password") {
               // tostify
-              console.log("atto chodo pass ?");
+              toast('Password is too short', {
+                position: "top-right",
+                autoClose: 950,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });
+             
             }
           });
       } else {
         // tostify
-        console.log(" password not match");
+        toast('password did not match', {
+          position: "top-right",
+          autoClose: 950,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Slide,
+          });
       }
     }
   };
@@ -115,7 +159,7 @@ const Regester = () => {
   return (
     <>
       <div className="w-full h-full flex justify-center ">
-        <div className=" w-[500px] h-[100vh] bg-cyan-500 flex flex-col items-center ">
+        <div className=" w-[500px] h-[100vh] bg-cyan-500 flex flex-col items-center pt-10 ">
           <h1 className="text-4xl font-bold mt-10">Regester</h1>
 
           <form
