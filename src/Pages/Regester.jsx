@@ -221,7 +221,7 @@ const Regester = () => {
             </button>
 
             <div className=" mt-10">
-              <Link to="/">
+              <Link to="/login">
                 {" "}
                 <p> Already have an accaount ? Login </p>{" "}
               </Link>

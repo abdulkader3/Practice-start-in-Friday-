@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { mainUser } from "../Slices/userSlice";
 import { Slide, toast } from "react-toastify";
+import { getDatabase, ref, set } from "firebase/database";
 
 const Login = () => {
 
@@ -24,6 +25,7 @@ const Login = () => {
 
   // firebase variabels
   const auth = getAuth();
+  const db = getDatabase();
 
   // custom state
   const [email, upemail] = useState("");
@@ -86,6 +88,15 @@ const Login = () => {
               transition: Slide,
               });
               navigate('/')
+
+
+              // user regester
+              set(ref(db, 'users/' + user.uid), {
+                username: user.displayName,
+                email: user.email,
+                profile_picture : user.photoURL,
+              });
+              // user regester
           }
         })
         .catch((error) => {
