@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import "./Pages.css";
 // firebase
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set, push } from "firebase/database";
 
 
 const AllUsers = () => {
@@ -14,7 +14,7 @@ const AllUsers = () => {
   // state for data manegement
   const [allUserdata , upallUserdata] = useState([])
 
-  console.log(allUserdata)
+ 
 
 
 
@@ -39,6 +39,25 @@ const AllUsers = () => {
     });
   }, []);
 
+  // send friend requast
+  const sendRequast = (userData)=>{
+
+    // firebase write data
+    set(push(ref(db, 'FriendRequast/')), {
+      UserId : userData.UserId,
+      username: userData.username,
+      email: userData.email,
+      profile_picture : userData.profile_picture
+    });
+  }
+  
+    // firebase write data
+
+  
+
+
+  
+
   return (
     <>
       <Navbar />
@@ -60,7 +79,9 @@ const AllUsers = () => {
                   />
                 </div>
                 <h3 className="w-[150px] font-bold "> {arrDAta?.username} </h3>
-                <button className="px-4 py-2 bg-black  text-white rounded-md hover:scale-110 active:scale-100 transition-all  ">
+                <button
+                 onClick={()=>sendRequast(arrDAta)}
+                 className="px-4 py-2 bg-black  text-white rounded-md hover:scale-110 active:scale-100 transition-all  ">
                   {" "}
                   Add
                 </button>

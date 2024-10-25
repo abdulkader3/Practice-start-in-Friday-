@@ -17,7 +17,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <Link to="#"> home</Link>
+            <Link to="/friendrequst"> Friend Requast</Link>
           </li>
           <li>
             <Link to="#"> home</Link>

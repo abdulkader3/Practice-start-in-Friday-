@@ -9,6 +9,7 @@ import LayouOne from "./Layout/LayouOne";
 import Login from "./Pages/Login";
 import AllFriends from "./Pages/AllFriends";
 import AllUsers from "./Pages/AllUsers";
+import FriendRquast from "./Pages/FriendRquast";
 
 function App() {
   const shanto = createBrowserRouter(
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/allfriends" element={<AllFriends />} />
           <Route path="/allusers" element={<AllUsers />} />
+          <Route path="/friendrequst" element={<FriendRquast />} />
         </Route>
       </Route>
     )
